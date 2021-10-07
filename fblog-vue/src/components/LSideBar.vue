@@ -25,9 +25,9 @@
                 <el-menu-item index="1-4-1">item one</el-menu-item>
             </el-sub-menu> -->
         </el-sub-menu>
-        <el-menu-item index="financial">
+        <el-menu-item index="word">
             <i class="el-icon-goods"></i>
-            <span>财务管理</span>
+            <span>词条管理</span>
         </el-menu-item>
         <el-menu-item index="repo" disabled>
             <i class="el-icon-document"></i>

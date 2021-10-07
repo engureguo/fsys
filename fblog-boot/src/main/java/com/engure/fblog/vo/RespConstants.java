@@ -21,6 +21,12 @@ public enum RespConstants {
     LOGIN_ERROR(500200, "登陆失败，账号或密码错误"),
     REGISTER_USERNAME_EXISTS(500201, "注册失败，账号已存在"),
     REGISTER_ERROR(500202, "注册失败"),
+
+    //word
+    FAIL_TO_ADD_WORD(500300, "添加词条失败！"),
+    FAIL_TO_UPDATE_WORD(500301, "更新词条失败"),
+    FAIL_TO_DELETE_WORD(500302, "删除词条失败"),
+
     ;
 
     public int getCode() {

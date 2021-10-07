@@ -20,6 +20,11 @@ const routes = [
         component: () => import('@/views/user/User')
       },
       {
+        path: 'word',
+        name: 'Word',
+        component: () => import('@/views/word/Word')
+      },
+      {
         path: 'index',
         name: 'Index',
         component: () => import('@/views/Index')
