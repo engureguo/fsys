@@ -1,0 +1,7 @@
+server.port: 8888
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 123
+    username: root
+    url: jdbc:mysql://localhost:3306/x-fblog?serverTimeZone=Asia/Shanghai&characterEncoding=UTF-8
