@@ -5,7 +5,7 @@
       <div class="person">
         <el-dropdown>
             <span class="el-dropdown-link">
-            {{user.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
+            {{user['userName']}}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <template #dropdown>
             <el-dropdown-menu>
@@ -22,7 +22,7 @@
 export default {
   data () {
     return {
-      user: null
+      user: {}
     }
   },
   methods: {

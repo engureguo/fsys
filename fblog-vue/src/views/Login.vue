@@ -68,6 +68,7 @@ export default {
   },
   methods: {
     login (formName) {
+      // 表单验证
       this.$refs[formName].validate((valid) => {
         if (valid) {
           request.post('/user/login', this.form)

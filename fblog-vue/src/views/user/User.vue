@@ -62,6 +62,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="年龄">
+          <!-- TO DO: fix bug，年龄可能为字符串 -->
           <el-input type="number" v-model="form.age" style="width: 90%" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="住址">

@@ -78,6 +78,7 @@ export default {
     }
   },
   methods: {
+    // 自定义校验方法
     isValid () {
       if (this.form.password !== this.form.confirm) {
         this.$message({
@@ -86,8 +87,7 @@ export default {
         })
         return false
       }
-      console.log(this.form.userName.length())
-      if (this.form.userName.length() === 0 || this.form.password.length() === 0) return false
+      if (this.form.userName.length === 0 || this.form.password.length === 0) return false
       return true
     },
     registerAcc (formName) {
@@ -100,6 +100,7 @@ export default {
                   type: 'success',
                   message: '注册成功~，请登录'
                 })
+                // 注册成功，去登陆页
                 this.$router.push('/login')
               } else {
                 this.$message({

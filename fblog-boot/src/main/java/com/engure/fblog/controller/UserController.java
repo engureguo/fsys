@@ -105,7 +105,7 @@ public class UserController {
                     .eq(User::getUserName, user.getUserName())
                     .eq(User::getPassword, user.getPassword()));
 
-            return u == null ? RespVO.error(RespConstants.LOGIN_ERROR) : RespVO.success(user);
+            return u == null ? RespVO.error(RespConstants.LOGIN_ERROR) : RespVO.success(u);
 
         } catch (Exception e) {
             // e.printStackTrace();
