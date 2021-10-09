@@ -27,6 +27,9 @@ public enum RespConstants {
     FAIL_TO_UPDATE_WORD(500301, "更新词条失败"),
     FAIL_TO_DELETE_WORD(500302, "删除词条失败"),
 
+    //文件上传
+    UPLOAD_FAIL(500400, "文件上传失败~"),
+
     ;
 
     public int getCode() {

@@ -32,7 +32,6 @@ export default {
     .lside {
       width: 200px;
       height: calc(100vh - 50px);
-      border: 1px solid #eee;
       display: inline-block;
       vertical-align: top;
     }
@@ -42,7 +41,8 @@ export default {
       height: calc(100vh - 50px);
       display: inline-block;
       vertical-align: top;
-      border: 1px solid #eee;
+      // 主体区域溢出部分使用滚动条
+      overflow: scroll;
     }
   }
 }

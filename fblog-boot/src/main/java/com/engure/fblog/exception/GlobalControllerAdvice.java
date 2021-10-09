@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalControllerAdvice {
 
-    @ExceptionHandler(value = Exception.class)
-    public RespVO handleServerException(Exception e) {
-        return RespVO.error(RespConstants.SERVER_ERROR, e.getMessage());
-    }
+//    @ExceptionHandler(value = Exception.class)
+//    public RespVO handleServerException(Exception e) {
+//        return RespVO.error(RespConstants.SERVER_ERROR, e.getMessage());
+//    }
 
     @ExceptionHandler(value = GlobalException.class)
     public RespVO handleGlobalException(GlobalException exp) {

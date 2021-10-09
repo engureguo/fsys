@@ -50,7 +50,7 @@ export default {
 
 .hdr {
   height: 50px;
-  padding: 0 10px;
+  padding: 0 20px;
   background: #f4f4f4;
   display: flex;
   align-content: space-around;
