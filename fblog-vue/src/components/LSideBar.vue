@@ -28,6 +28,10 @@
               <i class="el-icon-goods"></i>
               <span>词条管理</span>
           </el-menu-item>
+          <el-menu-item index="avatar">
+              <i class="el-icon-s-custom"></i>
+              <span>头像管理</span>
+          </el-menu-item>
           <el-menu-item index="repo" disabled>
               <i class="el-icon-document"></i>
               <span>关系管理</span>

@@ -30,6 +30,12 @@ public enum RespConstants {
     //文件上传
     UPLOAD_FAIL(500400, "文件上传失败~"),
 
+
+    //avatar
+    FAIL_TO_ADD_AVATAR(500500, "头像上传失败！"),
+    FAIL_TO_UPDATE_AVATAR(500501, "头像更新失败！"),
+    FAIL_TO_DELETE_AVATAR(500502, "头像删除失败！"),
+
     ;
 
     public int getCode() {

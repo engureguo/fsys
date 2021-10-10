@@ -12,3 +12,5 @@ spring:
       max-file-size: 10MB
       # 最大支持请求大小
       max-request-size: 10MB
+  jackson:
+    date-format: yyyy-MM-dd

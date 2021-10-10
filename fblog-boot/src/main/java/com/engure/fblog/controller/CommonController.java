@@ -59,7 +59,7 @@ public class CommonController {
 
         file.transferTo(dest);
 
-        String url = "/common/file/" + fileName;
+        String url = "http://localhost:8888/common/file/" + fileName;
 
         return RespVO.success("OK", url);
     }
