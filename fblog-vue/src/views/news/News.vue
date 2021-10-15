@@ -5,26 +5,18 @@
         <el-button type="primary" @click="add" plain>添加</el-button>
         <el-button type="info" plain>导入</el-button>
         <el-button type="success" plain>导出</el-button>
-        <el-input v-model="search" placeholder="按照名字模糊查询..." clearable style="width: 250px; margin: auto 10px"/>
+        <el-input v-model="search" placeholder="按照词条名模糊查询..." clearable style="width: 250px; margin: auto 10px"/>
         <el-button type="info" @click="searchByName" plain>搜索</el-button>
       </el-row>
     </div>
-
     <el-table :data="tableData" style="width: 100%">
+      <!-- change no.1 -->
         <el-table-column sortable prop="id" label="ID" />
-        <el-table-column prop="name" label="名字"  />
+        <el-table-column prop="title" label="词条"  />
         <el-table-column prop="createAt" label="创建时间"  />
-        <el-table-column label="头像">
-          <template #default="scope">
-            <el-image
-              style="width: 100px; height: 100px"
-              :src="scope.row.url"
-              :preview-src-list="[scope.row.url]">
-            </el-image>
-          </template>
-        </el-table-column>
         <el-table-column label="操作">
             <template #default="scope">
+              <el-button size="mini" @click="show_details(scope.row)">详情</el-button>
                 <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
                 <el-popconfirm title="确定删除吗？" @confirm="handleDel(scope.row.id)" icon="el-icon-info" icon-color="red">
                   <template #reference>
@@ -52,21 +44,17 @@
     <el-dialog
       v-model="addDialogVisable"
       title="添加"
-      width="30%">
+      width="70%">
       <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="名字">
-          <el-input v-model="form.name" style="width: 90%" placeholder=""></el-input>
+        <el-form-item label="新闻标题">
+          <el-input v-model="form.title" placeholder="请输入新闻标题"></el-input>
         </el-form-item>
         <el-form-item label="创建时间">
           <el-date-picker type="date" format="YYYY-MM-DD" clearable v-model="form.createAt"></el-date-picker>
         </el-form-item>
-        <el-form-item label="上传头像">
-          <el-upload
-            ref="upload"
-            :action="filesUploadUrl"
-            :on-success="filesUploadSuccess">
-            <el-button size="small" type="primary">Click to upload</el-button>
-          </el-upload>
+        <el-form-item label="新闻内容">
+          <!-- <el-input v-model="form.content" style="width: 90%" type="textarea" placeholder=""></el-input> -->
+          <div id="div1" ></div>
         </el-form-item>
       </el-form>
 
@@ -78,15 +66,27 @@
       </template>
     </el-dialog>
 
+    <el-dialog
+      v-model="showNewsDetailsDialog"
+      title="新闻详情"
+      width="70%"
+      >
+      <el-card>
+          <div style="min-height: 100px" v-html="form.content"></div>
+      </el-card>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import request from '@/util/request'
+import E from 'wangeditor'
+let editor = null;
+
 export default {
   data () {
     return {
-      filesUploadUrl: 'http://localhost:8888/common/upload/',
       form: {},
       addDialogVisable: false,
       pageSizes: [5, 10, 20],
@@ -95,19 +95,16 @@ export default {
       totalItemCount: 0,
       pageCount: 1,
       search: '',
-      tableData: []
+      tableData: [],
+      showNewsDetailsDialog: false, // 查看新闻详情
     }
   },
   created: function () {
     this.load()
   },
   methods: {
-    filesUploadSuccess (resp) {
-      console.log(resp)
-      if (resp.code === 200) this.form.url = resp.data
-    },
     load () {
-      request.get('/avatar', {
+      request.get('/news', {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
@@ -135,40 +132,48 @@ export default {
         })
       })
     },
+    show_details (row) {
+      // console.log(row)
+      this.form = JSON.parse(JSON.stringify(row))
+      this.showNewsDetailsDialog = true
+    },
     handleEdit (row) {
-      // 然而并没有错误
-      if (this.$refs['upload']) {
-        this.$refs['upload'].clearFiles()  // 清除历史文件列表
-      }
       // 深拷贝，拷贝自表格中的数据
       this.form = JSON.parse(JSON.stringify(row))
       this.addDialogVisable = true
-      // 是将回调函数延迟在下一次dom更新数据后调用
-      // this.$nextTick(() => {
-      //   if (this.$refs['upload']) {
-      //     this.$refs['upload'].clearFiles()  // 清除历史文件列表
-      //   }
-      // })
+      // 富文本编辑器
+      this.$nextTick(() => {
+        if (!editor) {
+          editor =  new E('#div1')
+          editor.config.height = 150
+          editor.create()
+        }
+        editor.txt.html(this.form.content)
+      })
     },
     searchByName () {
       this.load()
     },
     add () { // 打开添加弹框
-      this.addDialogVisable = true
       this.form = { }
-      if (this.$refs['upload']) {
-        this.$refs['upload'].clearFiles() // 清除历史文件列表
-      }
+      this.addDialogVisable = true
+      // 富文本编辑器
+      this.$nextTick(() => {
+        if (!editor) {
+          editor =  new E('#div1')
+          editor.config.height = 150
+          editor.create()
+        }
+        editor.txt.html('')
+      })
     },
     doAdd () {
+      if (editor) {
+        this.form.content = editor.txt.html()
+      }
       // 修改
       if (this.form.id) {
-        request.put('/avatar', {
-          id: this.form.id,
-          name: this.form.name,
-          url: this.form.url,
-          createAt: this.form.createAt
-        })
+        request.put('/news', this.form)
           .then(res => {
             this.$message({
               type: 'success',
@@ -184,11 +189,7 @@ export default {
           })
       } else {
         // 添加
-        request.post('/avatar', {
-          name: this.form.name,
-          createAt: this.form.createAt,
-          url: this.form.url
-        })
+        request.post('/news', this.form)
           .then(res => {
             this.$message({
               type: 'success',
@@ -206,7 +207,7 @@ export default {
       this.addDialogVisable = false
     },
     handleDel (id) {
-      request.delete('/avatar/' + id).then(res => {
+      request.delete('/news/' + id).then(res => {
         this.$message({
           type: 'success',
           message: res.msg

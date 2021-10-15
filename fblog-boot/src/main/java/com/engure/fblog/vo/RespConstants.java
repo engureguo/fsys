@@ -36,6 +36,11 @@ public enum RespConstants {
     FAIL_TO_UPDATE_AVATAR(500501, "头像更新失败！"),
     FAIL_TO_DELETE_AVATAR(500502, "头像删除失败！"),
 
+    //new
+    FAIL_TO_ADD_NEW(500500, "新闻上传失败！"),
+    FAIL_TO_UPDATE_NEW(500501, "新闻更新失败！"),
+    FAIL_TO_DELETE_NEW(500502, "新闻删除失败！"),
+
     ;
 
     public int getCode() {

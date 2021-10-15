@@ -36,9 +36,9 @@
               <i class="el-icon-document"></i>
               <span>关系管理</span>
           </el-menu-item>
-          <el-menu-item index="relation">
+          <el-menu-item index="news">
               <i class="el-icon-setting"></i>
-              <span>认证关系管理</span>
+              <span>新闻管理</span>
           </el-menu-item>
       </el-menu>
     </div>

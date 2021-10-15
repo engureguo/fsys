@@ -35,9 +35,9 @@ const routes = [
         component: () => import('@/views/Index')
       },
       {
-        path: 'financial',
-        name: 'Financial',
-        component: () => import('@/views/financial/Financial')
+        path: 'news',
+        name: 'News',
+        component: () => import('@/views/news/News')
       }
     ]
   },
