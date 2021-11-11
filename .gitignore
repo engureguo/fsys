@@ -1,6 +1,6 @@
 .DS_Store
-fblog-vue/node_modules
-fblog-boot/target
+fsys-vue/node_modules
+fsys-boot/target
 /dist
 
 
