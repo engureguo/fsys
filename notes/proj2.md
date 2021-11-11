@@ -75,9 +75,49 @@ this.$nextTick(() => {
 
 wang编辑器 https://www.wangeditor.com/
 
-`v-html="form.content"`
+```shell
+npm i wangeditor --save
+```
 
-文本的获取与渲染
+创建编辑框对象、设置与获取编辑器的内容
+
+```javascript
+handleEdit (row) {
+    // 深拷贝，拷贝自表格中的数据
+    this.form = JSON.parse(JSON.stringify(row))
+    this.addDialogVisable = true
+    // 富文本编辑器
+    this.$nextTick(() => {
+        if (!editor) {
+            editor =  new E('#div1')
+            editor.config.height = 150
+            editor.create()
+        }
+        editor.txt.html(this.form.content) 	// 设置编辑器内容
+    })
+}
+
+
+doAdd () {
+    if (editor) {
+        this.form.content = editor.txt.html()	// 获取编辑器内容
+    }
+}
+```
+
+文本预览
+
+```vue
+<el-dialog
+  v-model="showNewsDetailsDialog"
+  title="新闻详情"
+  width="70%"
+  >
+  <el-card>
+      <div style="min-height: 100px" v-html="form.content"></div>	<!-- v-html渲染 -->
+  </el-card>
+</el-dialog>
+```
 
 
 
@@ -105,7 +145,7 @@ wang编辑器 https://www.wangeditor.com/
 >
 > 自定义 mapper#method 使用分页：https://mp.baomidou.com/guide/interceptor-pagination.html#paginationinnerinterceptor
 
-<img src="images/proj2.assets/image-20211016003510659.png" alt="image-20211016003510659" style="zoom:80%;" />
+ <img src="images/proj2.assets/image-20211016003510659.png" alt="image-20211016003510659" style="zoom:80%;" />
 
 ```java
 class User {

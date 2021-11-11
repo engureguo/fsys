@@ -44,7 +44,7 @@
 
     <el-dialog
       v-model="addDialogVisable"
-      title="添加"
+      title="确定"
       width="30%">
       <el-form ref="form" :model="form" label-width="120px">
         <el-input v-model="form.id" placeholder="" type="hidden"></el-input>
